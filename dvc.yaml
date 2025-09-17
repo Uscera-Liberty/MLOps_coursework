@@ -18,11 +18,11 @@ stages:
     - data/processed
     - src/model_building.py
     outs:
-    - model.pkl
+    - models/model.pkl
   model_eval:
     cmd: python src/model_eval.py
     deps:
-    - model.pkl
+    - models/model.pkl
     - src/model_eval.py
     metrics:
     - metrics.json
