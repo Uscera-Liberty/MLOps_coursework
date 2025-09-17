@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/cccc9281c5794373be66194a7ab69f76/artifacts
+end_time: 1758114221156
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: cccc9281c5794373be66194a7ab69f76
+run_name: intelligent-worm-687
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758114219384
+status: 3
+tags: []
+user_id: kovoya

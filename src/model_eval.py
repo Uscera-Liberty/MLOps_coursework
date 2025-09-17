@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
-
-import numpy as np
-import pandas as pd
+import yaml
+import mlflow, mlflow.sklearn
 
 import pickle
 import json
@@ -15,6 +14,13 @@ def load_data(filepath : str) -> pd.DataFrame:
     except Exception as e:
         raise Exception(f"Error loading data from {filepath}:{e}")
 
+def load_params(params_path: str) -> int:
+    try:
+        with open(params_path, "r") as file:
+            params = yaml.safe_load(file)
+        return params["model_building"]["n_estimators"]
+    except Exception as e:
+        raise Exception(f"Error loading parameters from {params_path}: {e}")
 
 def prepare_data(data: pd.DataFrame) -> tuple[pd.DataFrame,pd.Series]:
     try:
@@ -73,8 +79,20 @@ def main():
         model = load_model(model_path)
         metrics = evaluation_model(model, X_test,y_test)
         save_metrics(metrics, metrics_path)
+
+        n_estimators = load_params("params.yaml")
     except Exception as e:
         raise Exception(f"An Error occurred: {e}")
+
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")
+        # здесь подумать над тем как менять имя на имя модели
+    mlflow.set_experiment("water_quality_RandomForest")
+
+    with mlflow.start_run():
+        mlflow.log_metrics(metrics)
+        mlflow.log_params({"n_estimators":n_estimators})
+        mlflow.log_artifact(metrics_path)
+        mlflow.sklearn.log_model(model, "model")
 
 if __name__ == "__main__":
     main()

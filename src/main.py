@@ -20,7 +20,7 @@ app = FastAPI(
     description = "predicting"
     )
 
-with open ("/home/kovoya/web-back/DVC/model.pkl","rb") as f:
+with open ("/home/kovoya/web-back/DVC/models/model.pkl","rb") as f:
     model = pickle.load(f)
 
 @app.get("/")

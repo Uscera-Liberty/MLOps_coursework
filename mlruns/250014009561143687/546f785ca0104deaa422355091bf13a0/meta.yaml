@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/546f785ca0104deaa422355091bf13a0/artifacts
+end_time: 1758114069641
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: 546f785ca0104deaa422355091bf13a0
+run_name: silent-mare-195
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758114069627
+status: 4
+tags: []
+user_id: kovoya
