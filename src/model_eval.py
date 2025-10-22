@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
 import json
+from mlflow.models import infer_signature
 
 from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,confusion_matrix
 
@@ -52,7 +53,7 @@ def evaluation_model(model, X_test:pd.DataFrame, y_test:pd.Series) -> dict:
 
         cm = confusion_matrix(y_test, y_pred)
         cm.tolist()
-        
+
         metrics_dict = {
             'acc':acc,
             'precision':pre,
@@ -109,8 +110,7 @@ def main():
 
     mlflow.set_tracking_uri("http://127.0.0.1:5000")
         # здесь подумать над тем как менять имя на имя модели
-    mlflow.set_experiment("water_quality_RandomForest")
-
+    mlflow.set_experiment("water_quality_RandomForest_AUTOLOG")
 
     with mlflow.start_run():
         mlflow.log_metrics(metrics)
@@ -119,7 +119,16 @@ def main():
         mlflow.log_params({"n_estimators":n_estimators})
         mlflow.log_artifact(metrics_path)
         mlflow.log_artifact(cm_path)
-        mlflow.sklearn.log_model(model, "model")
 
+        y_pred = model.predict(X_test)
+        signature = infer_signature(X_test, y_pred)
+        mlflow.sklearn.log_model(
+        sk_model=model,
+        artifact_path="model",
+        signature=signature,
+        registered_model_name="WaterQualityRandomForest"
+    )
+
+        
 if __name__ == "__main__":
     main()

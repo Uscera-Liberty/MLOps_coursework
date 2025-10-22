@@ -1,0 +1,6 @@
+artifact_location: mlflow-artifacts:/940688390088317092
+creation_time: 1761126285688
+experiment_id: '940688390088317092'
+last_update_time: 1761126285688
+lifecycle_stage: active
+name: water_quality_RandomForest_AUTOLOG

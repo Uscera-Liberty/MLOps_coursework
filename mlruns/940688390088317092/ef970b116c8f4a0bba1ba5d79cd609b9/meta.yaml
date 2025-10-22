@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/940688390088317092/ef970b116c8f4a0bba1ba5d79cd609b9/artifacts
+end_time: 1761132058383
+entry_point_name: ''
+experiment_id: '940688390088317092'
+lifecycle_stage: active
+run_id: ef970b116c8f4a0bba1ba5d79cd609b9
+run_name: adaptable-grouse-623
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761132056508
+status: 3
+tags: []
+user_id: kovoya

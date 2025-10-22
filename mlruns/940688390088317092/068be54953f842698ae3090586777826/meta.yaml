@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/940688390088317092/068be54953f842698ae3090586777826/artifacts
+end_time: 1761129423673
+entry_point_name: ''
+experiment_id: '940688390088317092'
+lifecycle_stage: active
+run_id: 068be54953f842698ae3090586777826
+run_name: rogue-smelt-695
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761129423618
+status: 4
+tags: []
+user_id: kovoya
