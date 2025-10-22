@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/9709a255f01f4cb6acd53c87bc2aa2f0/artifacts
+end_time: 1761125578956
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: 9709a255f01f4cb6acd53c87bc2aa2f0
+run_name: agreeable-cub-96
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761125577191
+status: 3
+tags: []
+user_id: kovoya

@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/50b657681aba4f2696d83c1de18cdae0/artifacts
+end_time: 1761125483024
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: 50b657681aba4f2696d83c1de18cdae0
+run_name: casual-koi-281
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761125483011
+status: 4
+tags: []
+user_id: kovoya

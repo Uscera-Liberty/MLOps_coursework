@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/6edc5c82ae374ad8a56c8d009fe75b55/artifacts
+end_time: 1761124357454
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: 6edc5c82ae374ad8a56c8d009fe75b55
+run_name: loud-kite-513
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761124355697
+status: 3
+tags: []
+user_id: kovoya

@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/250014009561143687/194e616e8f66454a8252e2ddc818944f/artifacts
+end_time: 1761124317974
+entry_point_name: ''
+experiment_id: '250014009561143687'
+lifecycle_stage: active
+run_id: 194e616e8f66454a8252e2ddc818944f
+run_name: unique-lynx-474
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761124316158
+status: 3
+tags: []
+user_id: kovoya

@@ -2,11 +2,12 @@ import numpy as np
 import pandas as pd
 import yaml
 import mlflow, mlflow.sklearn
-
+import matplotlib.pyplot as plt
+import seaborn as sns
 import pickle
 import json
 
-from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
+from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score,confusion_matrix
 
 def load_data(filepath : str) -> pd.DataFrame:
     try:
@@ -49,17 +50,30 @@ def evaluation_model(model, X_test:pd.DataFrame, y_test:pd.Series) -> dict:
         recall = recall_score(y_test,y_pred)
         f1score = f1_score(y_test,y_pred)
 
+        cm = confusion_matrix(y_test, y_pred)
+        cm.tolist()
+        
         metrics_dict = {
-
             'acc':acc,
             'precision':pre,
             'recall' : recall,
             'f1_score': f1score
         }
-        return metrics_dict
+        return metrics_dict, cm
     except Exception as e:
         raise Exception(f"Error evaluating model : {e}")
 
+def save_confusion_matrix(cm, path: str):
+    plt.figure(figsize=(5, 4))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=["Pred 0", "Pred 1"],
+                yticklabels=["True 0", "True 1"])
+    plt.title("Confusion Matrix")
+    plt.ylabel("Actual")
+    plt.xlabel("Predicted")
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
 
 def save_metrics(metrics:dict,metrics_path:str) -> None:
     try:
@@ -71,14 +85,23 @@ def save_metrics(metrics:dict,metrics_path:str) -> None:
 def main():
     try:
         test_data_path = "data/processed/test_processed.csv"
+        train_data_path = "data/processed/train_processed.csv"
+
         model_path = "models/model.pkl"
         metrics_path = "metrics.json"
 
         test_data = load_data(test_data_path)
+        train_data = load_data(train_data_path)
         X_test, y_test = prepare_data(test_data)
+
+        test_df = mlflow.data.from_pandas(test_data)
+        train_df = mlflow.data.from_pandas(train_data)
+
         model = load_model(model_path)
-        metrics = evaluation_model(model, X_test,y_test)
+        metrics, cm = evaluation_model(model, X_test,y_test)
         save_metrics(metrics, metrics_path)
+        cm_path = "confusion_matrix.png"
+        save_confusion_matrix(cm, cm_path)
 
         n_estimators = load_params("params.yaml")
     except Exception as e:
@@ -88,10 +111,14 @@ def main():
         # здесь подумать над тем как менять имя на имя модели
     mlflow.set_experiment("water_quality_RandomForest")
 
+
     with mlflow.start_run():
         mlflow.log_metrics(metrics)
+        mlflow.log_input(train_df, "train")
+        mlflow.log_input(test_df, "test")
         mlflow.log_params({"n_estimators":n_estimators})
         mlflow.log_artifact(metrics_path)
+        mlflow.log_artifact(cm_path)
         mlflow.sklearn.log_model(model, "model")
 
 if __name__ == "__main__":
